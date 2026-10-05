@@ -40,16 +40,19 @@ while True:
         x, y, w, h = cv2.boundingRect(cnt)
         cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
-    status = "MOVEMENT DETECTED" if moving else "No movement"
+    status = "MOVEMENT DETECTED" if moving else "NO MOVEMENT"
     color = (0, 0, 255) if moving else (0, 200, 0)
     cv2.putText(frame, status, (10, 35), cv2.FONT_HERSHEY_SIMPLEX, 1, color, 2)
 
     prev_gray = gray                    # current frame becomes the "previous" one
 
     cv2.imshow("Jarvis - motion detection (Esc to quit)", frame)
-    cv2.imshow("What the computer sees", mask)
+    #cv2.imshow("What the computer sees", mask)
     if cv2.waitKey(1) & 0xFF == 27:
         break
 
 cap.release()
 cv2.destroyAllWindows()
+
+if __name__ == "__main__":
+    main()
