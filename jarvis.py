@@ -1,30 +1,53 @@
+from laptop_controls import toggle_music_playback, volume_down, volume_up
+from llm_brain import ask_ai
 from mic_test import opening_command
 from palm_test import palm_test
-from speak_test import opening_website, outro
+from speak_test import opening_website, outro, speak_text
 from voice_test import voice_test
+
+
+GESTURES = {
+    "Open_Palm",
+    "Closed_Fist",
+    "Thumb_Up",
+    "Thumb_Down",
+    "Victory",
+}
 
 
 def main():
     while True:
-        # Wait for a clap to start a session.
+        # A clap starts a new Jarvis session.
         opening_command()
+        print("Clap heard. Camera gesture detection is running without a preview.")
 
-        # Wait for an open palm.
-        gesture = palm_test("Open_Palm")
-        if gesture != "Open_Palm":
-            continue
+        while True:
+            # Wait for any gesture Jarvis knows how to handle.
+            gesture = palm_test(GESTURES)
 
-        # Ask for a website and open the spoken request.
-        print("Open palm detected. Listening for a website command now.")
-        opening_website()
-        voice_test()
+            if gesture == "Closed_Fist":
+                # End this session; the outer loop will wait for another clap.
+                outro()
+                print("Jarvis is waiting for a clap.")
+                break
 
-        # Wait for a closed fist to end this session.
-        print("Website command finished. Waiting for a closed fist.")
-        gesture = palm_test("Closed_Fist")
-        if gesture == "Closed_Fist":
-            outro()
-            print("Jarvis is waiting. Clap to start again.")
+            elif gesture == "Open_Palm":
+                # Open palm asks for one website command or question.
+                opening_website()
+                question = voice_test()
+                if question:
+                    answer = ask_ai(question)
+                    print("Jarvis:", answer)
+                    speak_text(answer)
+
+            elif gesture == "Thumb_Up":
+                speak_text(volume_up())
+
+            elif gesture == "Thumb_Down":
+                speak_text(volume_down())
+
+            elif gesture == "Victory":
+                speak_text(toggle_music_playback())
 
 
 if __name__ == "__main__":

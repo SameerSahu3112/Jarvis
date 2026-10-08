@@ -13,6 +13,7 @@ def voice_test():
             print("Say: open YouTube")
             print("Say: open Gmail")
             print("Say: open Google")
+            print("Or ask Jarvis a question.")
             recording = recognizer.listen(
                 microphone,
                 timeout=8,
@@ -36,19 +37,24 @@ def voice_test():
 
     # Require an explicit command so merely hearing a site name does not open it.
     if not words.startswith("open "):
-        print("Please say 'open' followed by a website, such as 'open YouTube'.")
-        return
+        # A normal question should go to the AI instead of the website router.
+        return words
 
     website_name = words.removeprefix("open ").strip()
 
     if "youtube" in website_name:
         print("Opening YouTube.")
         webbrowser.open("https://www.youtube.com")
+        return None
     elif "gmail" in website_name:
         print("Opening Gmail.")
         webbrowser.open("https://mail.google.com")
+        return None
     elif "google" in website_name:
         print("Opening Google.")
         webbrowser.open("https://www.google.com")
     else:
-        print("I didn't understand that command.")
+        # Return general questions, and unsupported commands, to the AI brain.
+        return words
+
+    return None
