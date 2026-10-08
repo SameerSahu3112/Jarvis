@@ -40,7 +40,18 @@ def ask_ai(question):
         with urlopen(request, timeout=30) as response:
             result = json.loads(response.read().decode("utf-8"))
     except HTTPError as error:
-        return f"OpenAI returned an error, HTTP {error.code}. Check the API key and account."
+        try:
+            error_body = json.loads(error.read().decode("utf-8"))
+            details = error_body.get("error", {})
+            error_code = details.get("code") or details.get("type")
+            error_message = details.get("message")
+            if error_code and error_message:
+                return f"OpenAI error {error_code}: {error_message}"
+            if error_message:
+                return f"OpenAI error: {error_message}"
+        except (ValueError, AttributeError):
+            pass
+        return f"OpenAI returned HTTP {error.code}. Check the API error details."
     except URLError:
         return "I could not connect to OpenAI. Check the internet connection and try again."
     except TimeoutError:
