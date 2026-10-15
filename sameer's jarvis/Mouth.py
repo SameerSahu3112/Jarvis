@@ -1,5 +1,5 @@
 import subprocess
-def mouth():
+def speak():
     # * -v = specifies the voice and -r = specifies the rate of speech
     while True:
         command = input("What Your Question:  ")
@@ -12,4 +12,5 @@ def opening_command():
 
 def closing_command():
     subprocess.run(["say","-v", "Daniel", "-r", "250", "Jarvis Is Shutting Down."])
+
 
