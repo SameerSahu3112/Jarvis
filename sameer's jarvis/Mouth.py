@@ -7,4 +7,5 @@ def opening_command():
 def closing_command():
     subprocess.run(["say","-v", "Daniel", "-r", "250", "Jarvis Is Shutting Down."])
 
-
+def speak(text):
+    subprocess.run(["say","-v", "Daniel", "-r", "250", text])
