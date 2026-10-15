@@ -1,6 +1,0 @@
-__pycache__/
-*.pyc
-jarvis_log.jsonl
-.venv/
-gesture_recognizer.task
-
