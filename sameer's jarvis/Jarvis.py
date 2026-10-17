@@ -18,7 +18,7 @@ def question_mode():
 
 def application_mode():
     while True:
-        speak("Application, website, or exit?")
+        speak("what would you like to do? Application, website, or exit?")
         choice = listen().lower()
         if "exit" in choice:
             return
@@ -34,7 +34,7 @@ def main():
         pass
     opening_command()
     while True:
-        speak("Question, application, or exit?")
+        speak("what would you like to do? Question, application, or exit?")
         choice = listen().lower()
         if "question" in choice:
             question_mode()

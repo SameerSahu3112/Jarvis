@@ -36,9 +36,11 @@ def handle_command(command):
     speak("Sorry, I don't know that application yet.")
 
 def open_website(name):
-    url = SITES.get(name.lower())
-    if url:
-        webbrowser.open(url)
-        speak(f"Opening {name}")
-    else:
-        speak("Sorry, I don't know that website yet.")
+    name = name.lower().strip()
+    print("Website heard:", name)          # debug line, remove later
+    for key, url in SITES.items():
+        if key in name:
+            webbrowser.open(url)
+            speak(f"Opening {key}")
+            return
+    speak("Sorry, I don't know that website yet.")
