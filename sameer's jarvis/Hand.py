@@ -1,36 +1,44 @@
-import webbrowser
-import subprocess
+# Hand.py
+import subprocess, webbrowser
 from Mouth import speak
 
-def open_app(app_name):
-    try:
-        #* -a specifies the application to open 
-        subprocess.Popen(["open", "-a", app_name])
-        speak(f"Opening {app_name}...")
+APPS = {
+    "calculator": "Calculator",
+    "whatsapp": "WhatsApp",
+    "vs code": "Visual Studio Code",
+    "visual studio code": "Visual Studio Code",
+    "browser": "Safari",
+    "safari": "Safari",
+}
 
-    except Exception as e:
-        speak(f"Couldn't open {app_name}: {e}")
+SITES = {
+    "google": "https://www.google.com",
+    "youtube": "https://www.youtube.com",
+    "gmail": "https://mail.google.com",
+    "instagram": "https://www.instagram.com",
+    "linkedin": "https://www.linkedin.com",
+}
+
+def open_app(name):
+    #* -a specifies the application to open
+    result = subprocess.run(["open", "-a", name], capture_output=True)
+    if result.returncode == 0:
+        speak(f"Opening {name}")
+    else:
+        speak(f"I couldn't find {name}")
 
 def handle_command(command):
-    command = command.lower().strip()
-    if "open calculator" in command:
-        speak("Opening Calculator...")
-        open_app("Calculator")
-    elif "open whatsapp" in command:
-        speak("Opening WhatsApp...")
-        open_app("WhatsApp")
-    elif "open vs code" in command or "open visual studio code" in command:
-        speak("Opening Visual Studio Code...")
-        open_app("Visual Studio Code")
-    elif "open browser" in command or "open safari" in command:
-        speak("Opening Safari...")
-        open_app("Safari")
-    else:
-        print("Sorry, I don't know that command yet.")
+    command = command.lower()
+    for key, app in APPS.items():
+        if key in command:
+            open_app(app)
+            return
+    speak("Sorry, I don't know that application yet.")
 
-def open_website(url):
-    try:
+def open_website(name):
+    url = SITES.get(name.lower())
+    if url:
         webbrowser.open(url)
-        speak(f"Opening {url}...")
-    except Exception as e:
-        speak(f"Couldn't open {url}: {e}")
+        speak(f"Opening {name}")
+    else:
+        speak("Sorry, I don't know that website yet.")
