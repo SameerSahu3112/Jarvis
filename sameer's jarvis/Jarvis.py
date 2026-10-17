@@ -3,6 +3,8 @@ from Mouth import opening_command, closing_command, speak
 from Hand import handle_command, open_website
 from Ear import listen
 from Brain import ask_jarvis
+import sys
+from logger import log
 
 def question_mode():
     while True:
@@ -13,12 +15,13 @@ def question_mode():
         if "exit" in q.lower():
             return
         answer = ask_jarvis(q)
+        log(f"QUESTION | {q} | answered")
         print("Jarvis:", answer)
         speak(answer)
 
 def application_mode():
     while True:
-        speak("what would you like to do? Application, website, or exit?")
+        speak("what would you like to do? App, website, or exit?")
         choice = listen().lower()
         if "exit" in choice:
             return
@@ -32,6 +35,7 @@ def application_mode():
 def main():
     while "jarvis" not in listen().lower():
         pass
+    log("START | Jarvis woke up")
     opening_command()
     while True:
         speak("what would you like to do? Question, application, or exit?")
@@ -41,8 +45,9 @@ def main():
         elif "application" in choice:
             application_mode()
         elif "exit" in choice:
+            log("EXIT | user said exit")
             closing_command()
-            break
+            sys.exit()
 
 if __name__ == "__main__":
     main()

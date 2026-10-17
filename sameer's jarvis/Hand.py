@@ -1,6 +1,7 @@
 # Hand.py
 import subprocess, webbrowser
 from Mouth import speak
+from logger import log
 
 APPS = {
     "calculator": "Calculator",
@@ -24,8 +25,11 @@ def open_app(name):
     result = subprocess.run(["open", "-a", name], capture_output=True)
     if result.returncode == 0:
         speak(f"Opening {name}")
+        log(f"APP | opened {name} | success")
     else:
         speak(f"I couldn't find {name}")
+        log(f"APP | {name} | FAILED: app not found")
+
 
 def handle_command(command):
     command = command.lower()
@@ -33,6 +37,7 @@ def handle_command(command):
         if key in command:
             open_app(app)
             return
+    log(f"APP | heard '{command}' | FAILED: unknown application")
     speak("Sorry, I don't know that application yet.")
 
 def open_website(name):
@@ -42,5 +47,7 @@ def open_website(name):
         if key in name:
             webbrowser.open(url)
             speak(f"Opening {key}")
+            log(f"WEBSITE | opened {key} | success")
             return
+    log(f"WEBSITE | heard '{name}' | FAILED: unknown website")
     speak("Sorry, I don't know that website yet.")
