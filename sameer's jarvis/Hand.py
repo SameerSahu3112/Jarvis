@@ -44,28 +44,10 @@ def open_website(name):
     name = name.lower().strip()
     print("Website heard:", name)          # debug line, remove later
     for key, url in SITES.items():
-        if key in name:
+        if key in name.replace(" ", ""):   # "you tube" becomes "youtube"
             webbrowser.open(url)
             speak(f"Opening {key}")
             log(f"WEBSITE | opened {key} | success")
             return
     log(f"WEBSITE | heard '{name}' | FAILED: unknown website")
     speak("Sorry, I don't know that website yet.")
-
-def run_app(name):
-    name = name.lower().strip()
-    for key, app in APPS.items():
-        if key in name:
-            result = subprocess.run(["open", "-a", app], capture_output=True)
-            if result.returncode == 0:
-                return f"Opened {app}"
-            return f"Failed: could not find {app}"
-    return f"Failed: '{name}' is not an allowed application"
-
-def run_website(name):
-    name = name.lower().strip()
-    for key, url in SITES.items():
-        if key in name:
-            webbrowser.open(url)
-            return f"Opened {key}"
-    return f"Failed: '{name}' is not an allowed website"
