@@ -4,7 +4,7 @@ def ask_jarvis(question):
     client = ollama.Client()
 
     response = client.chat(
-        model="llama3.2:1b",
+        model="qwen3:4b",
         messages=[
             {
                 "role": "user",

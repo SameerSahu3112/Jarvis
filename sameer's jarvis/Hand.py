@@ -1,4 +1,5 @@
 # Hand.py
+from Ear import listen
 import subprocess, webbrowser
 from Mouth import speak
 from logger import log
@@ -51,3 +52,4 @@ def open_website(name):
             return
     log(f"WEBSITE | heard '{name}' | FAILED: unknown website")
     speak("Sorry, I don't know that website yet.")
+

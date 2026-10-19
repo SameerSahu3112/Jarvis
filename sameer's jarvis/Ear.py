@@ -10,6 +10,8 @@ def listen():
         try:
             audio = recognizer.listen(
                 source,
+                #* timeout specifies how long to wait for a phrase to start
+                #* phrase_time_limit specifies how long to wait for a phrase to end
                 timeout=5,
                 phrase_time_limit=5
             )
