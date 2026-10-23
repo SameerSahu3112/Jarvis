@@ -20,3 +20,36 @@
 2026-10-19 16:12:24 | START | Jarvis woke up
 2026-10-19 16:13:10 | APP | opened Spotify | success
 2026-10-19 16:13:31 | EXIT | user said exit
+2026-10-21 12:30:58 | START | Jarvis woke up
+2026-10-21 13:20:08 | START | Jarvis woke up
+2026-10-21 13:21:05 | TOOLS | heard: increase brightness
+2026-10-21 13:21:25 | TOOLS | heard: to permission de di maine
+2026-10-21 13:21:38 | TOOLS | heard: increase brightness
+2026-10-21 13:21:38 | TOOL | brightness up
+2026-10-21 13:21:49 | TOOLS | heard: screenshot
+2026-10-21 13:22:04 | TOOLS | heard: screenshot
+2026-10-21 13:22:18 | TOOLS | heard: 
+2026-10-21 13:22:27 | TOOLS | heard: 
+2026-10-23 12:32:18 | START | Jarvis woke up
+2026-10-23 12:32:45 | TOOLS | heard: take screenshot
+2026-10-23 12:32:56 | TOOLS | heard: open folder
+2026-10-23 12:33:08 | TOOLS | heard: document
+2026-10-23 12:33:18 | TOOLS | heard: show me all the
+2026-10-23 12:33:26 | TOOLS | heard: show me all the
+2026-10-23 12:33:35 | TOOLS | heard: show me all the folders
+2026-10-23 12:36:24 | START | Jarvis woke up
+2026-10-23 12:36:37 | VESSEL | 'open the folder' -> open_anything
+2026-10-23 12:36:37 | VESSEL | 'open the folder' -> brain (agent)
+2026-10-23 12:47:19 | START | Jarvis woke up
+2026-10-23 12:47:31 | VESSEL | 'what is 2 + 2' -> brain (agent)
+2026-10-23 12:48:29 | VESSEL | 'open folders' -> open_anything
+2026-10-23 12:48:29 | VESSEL | 'open folders' -> brain (agent)
+2026-10-23 12:48:46 | AGENT | list_folders('') -> Folders in manojsahu:  claude jarvis, Applications, BOOKS , College, Desktop, Do
+2026-10-23 12:49:56 | VESSEL | 'show folder plot jarvis' -> brain (agent)
+2026-10-23 12:50:21 | AGENT | show_folder('plot Jarvis') -> Done.
+2026-10-23 12:52:23 | START | Jarvis woke up
+2026-10-23 12:52:36 | VESSEL | 'open youtube' -> open_anything
+2026-10-23 12:52:45 | WEBSITE | opened youtube | success
+2026-10-23 12:53:17 | VESSEL | 'what's the battery percentage' -> brain (agent)
+2026-10-23 12:53:24 | AGENT | battery('') -> Failed: battery_info() takes 0 positional arguments but 1 was given
+2026-10-23 12:56:01 | AGENT | battery('battery percentage') -> Failed: battery_info() takes 0 positional arguments but 1 was given

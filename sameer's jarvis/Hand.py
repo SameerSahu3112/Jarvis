@@ -1,5 +1,4 @@
 # Hand.py
-from Ear import listen
 import subprocess, webbrowser
 from Mouth import speak
 from logger import log

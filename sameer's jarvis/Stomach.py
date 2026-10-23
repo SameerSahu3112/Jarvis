@@ -87,3 +87,5 @@ def load_memorized():
         SITES[name] = url
 
     db.close()
+
+#! add delete memories and update memories functions 
