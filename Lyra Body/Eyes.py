@@ -15,7 +15,7 @@ BLOCKED_WORDS = ("password", "secret", "token", "nerves", "credential")
 
 
 def is_safe(path):
-    """Jarvis may only read inside your home folder, and never private things."""
+    """Lyra may only read inside your home folder, and never private things."""
     if not path.startswith(HOME):
         return False
     #* relpath makes the path start from your home folder.
@@ -102,7 +102,7 @@ def read_file(text=""):
 
 
 def look_at_screen(text=""):
-    path = os.path.join(tempfile.gettempdir(), "jarvis_screen.png")
+    path = os.path.join(tempfile.gettempdir(), "lyra_screen.png")
     result = subprocess.run(["screencapture", "-x", path])
     if result.returncode != 0 or not os.path.exists(path):
         return "I could not capture the screen. Screen recording permission may be missing."

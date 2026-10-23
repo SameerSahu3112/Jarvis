@@ -74,7 +74,7 @@ def show_memorized_texts():
 
 
 def load_memorized():
-    # Runs once when Jarvis starts. Puts saved apps and websites back into the lists.
+    # Runs once when Lyra starts. Puts saved apps and websites back into the lists.
     db = create_connection_route()
     cursor = db.cursor()
 

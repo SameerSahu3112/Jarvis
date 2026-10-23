@@ -10,9 +10,9 @@ from vessels import send
 EXIT_WORDS = ("exit", "goodbye", "quit", "shut down")
 
 def main():
-    while "jarvis" not in listen().lower():
+    while "lyra" not in listen().lower():
         pass
-    log("START | Jarvis woke up")
+    log("START | Lyra woke up")
     load_memorized()
     opening_command()
 

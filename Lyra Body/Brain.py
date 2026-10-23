@@ -71,7 +71,7 @@ for name, (function, description) in TOOL_LIST.items():
     })
 
 SYSTEM_PROMPT = (
-    "You are Jarvis, a voice assistant on a Mac. "
+    "You are Lyra, a voice assistant on a Mac. "
     "Use the tools to do things on the laptop. "
     "Action tools speak for themselves, so after using only action tools just say Done. "
     "Information tools return text. Read that text carefully, then answer the user's question "
@@ -98,7 +98,7 @@ def clean(answer):
     return answer or "Done."
 
 
-def ask_jarvis(question):
+def ask_lyra(question):
     trim_history()
     start = len(history)
     history.append({"role": "user", "content": question})
