@@ -10,6 +10,9 @@ APPS = {
     "visual studio code": "Visual Studio Code",
     "browser": "Safari",
     "safari": "Safari",
+    "claude": "Claude",
+    "codex": "ChatGPT ",
+    "devin": "Devin"
 }
 
 SITES = {
