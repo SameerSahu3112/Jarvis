@@ -72,3 +72,50 @@
 2026-10-24 13:55:13 | VESSEL | 'open gmail' -> open_anything
 2026-10-24 13:55:16 | WEBSITE | opened gmail | success
 2026-10-24 13:55:24 | VESSEL | 'what is my gmail password' -> brain (agent)
+2026-10-26 14:21:07 | EAR | google (en-US) took 1.1s: Lyra -> Lyra
+2026-10-26 14:21:07 | START | Lyra woke up
+2026-10-26 14:21:18 | EAR | google (en-US) took 1.0s: open plot -> open plot
+2026-10-26 14:21:18 | VESSEL | 'open plot' -> open_anything
+2026-10-26 14:21:18 | VESSEL | 'open plot' -> brain (agent)
+2026-10-26 14:21:18 | BRAIN | FAILED: Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download
+2026-10-26 16:30:00 | EAR | google (en-US) took 1.0s: Lyra -> Lyra
+2026-10-26 16:30:00 | START | Lyra woke up
+2026-10-26 16:30:10 | EAR | google (en-US) took 0.8s: open Cloud -> open Cloud
+2026-10-26 16:30:10 | VESSEL | 'open cloud' -> open_anything
+2026-10-26 16:30:10 | VESSEL | 'open cloud' -> brain (agent)
+2026-10-26 16:30:10 | BRAIN | FAILED: Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download
+2026-10-26 16:30:23 | EAR | google (en-US) took 0.9s: open olama -> open olama
+2026-10-26 16:30:23 | VESSEL | 'open olama' -> open_anything
+2026-10-26 16:30:23 | VESSEL | 'open olama' -> brain (agent)
+2026-10-26 16:31:15 | APP | heard 'olama' | FAILED: unknown application
+2026-10-26 16:31:22 | AGENT | open_app('olama') -> Done.
+2026-10-26 16:32:11 | EAR | google (en-US) took 0.9s: open Cloud -> open Cloud
+2026-10-26 16:32:11 | VESSEL | 'open cloud' -> open_anything
+2026-10-26 16:32:11 | VESSEL | 'open cloud' -> brain (agent)
+2026-10-26 16:32:42 | EAR | google (en-US) took 1.3s: plot plot anthropic plot -> plot plot anthropic plot
+2026-10-26 16:32:42 | VESSEL | 'plot plot anthropic plot' -> brain (agent)
+2026-10-26 17:21:45 | EAR | google (en-US) took 0.8s: Lyra -> Lyra
+2026-10-26 17:21:45 | START | Lyra woke up
+2026-10-26 17:21:53 | EAR | google (en-US) took 0.8s: open Codex -> open Codex
+2026-10-26 17:21:53 | VESSEL | 'open codex' -> open_anything
+2026-10-26 17:21:56 | APP | ChatGPT  | FAILED: app not found
+2026-10-26 17:22:00 | EAR | google (en-US) took 0.7s: open -> open
+2026-10-26 17:22:00 | VESSEL | 'open' -> open_anything
+2026-10-26 17:22:00 | VESSEL | 'open' -> brain (agent)
+2026-10-26 17:22:44 | EAR | google (en-US) took 0.8s: open YouTube -> open YouTube
+2026-10-26 17:22:44 | VESSEL | 'open youtube' -> open_anything
+2026-10-26 17:22:52 | WEBSITE | opened youtube | success
+2026-10-26 17:23:00 | EAR | google (en-US) took 1.1s: search -> search
+2026-10-26 17:23:00 | VESSEL | 'search' -> brain (agent)
+2026-10-26 17:23:36 | EAR | google (en-US) took 1.4s: search code with Harry in YouTube -> search code with Harry in YouTube
+2026-10-26 17:23:36 | VESSEL | 'search code with harry in youtube' -> brain (agent)
+2026-10-26 17:24:14 | WEBSITE | opened youtube | success
+2026-10-26 17:24:14 | AGENT | open_website('youtube') -> Done.
+2026-10-26 17:24:45 | EAR | google (en-US) took 1.0s: you search code with -> you search code with
+2026-10-26 17:24:45 | VESSEL | 'you search code with' -> brain (agent)
+2026-10-26 17:25:56 | EAR | google (en-US) took 0.9s: code with Harry -> code with Harry
+2026-10-26 17:25:56 | VESSEL | 'code with harry' -> brain (agent)
+2026-10-26 17:26:48 | EAR | google (en-US) took 0.9s: code with Harry -> code with Harry
+2026-10-26 17:26:48 | VESSEL | 'code with harry' -> brain (agent)
+2026-10-26 17:27:23 | EAR | google (en-US) took 1.0s: exit -> exit
+2026-10-26 17:27:23 | EXIT | user said exit

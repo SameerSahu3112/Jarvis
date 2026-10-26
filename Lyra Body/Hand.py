@@ -2,6 +2,8 @@
 import subprocess, webbrowser
 from Mouth import speak
 from logger import log
+import re
+from urllib.parse import quote_plus
 
 APPS = {
     "calculator": "Calculator",
@@ -55,3 +57,42 @@ def open_website(name):
     log(f"WEBSITE | heard '{name}' | FAILED: unknown website")
     speak("Sorry, I don't know that website yet.")
 
+def extract_query(text):
+    """Pulls the search words out of a sentence like 'search code with harry in youtube'."""
+    query = text.lower().strip().replace("you tube", "youtube")
+    query = re.sub(r"^\W*(?:(?:hey|ok|okay|please|jarvis|lyra|can you|could you)\s+)*", "", query)
+    query = re.sub(r"^(?:search for|search|look up|find)\s+", "", query)
+    query = re.sub(r"^(?:on|in)\s+(?:youtube|google)\s+(?:for\s+)?", "", query)
+    query = re.sub(r"\s+(?:on|in)\s+(?:youtube|google)\W*$", "", query)
+    query = re.sub(r"^(?:youtube|google)\s+(?:for\s+)?", "", query)
+    return query.strip(" .?!")
+
+
+def search_youtube(text):
+    query = extract_query(text)
+    if not query:
+        speak("What should I search for?")
+        return
+    webbrowser.open("https://www.youtube.com/results?search_query=" + quote_plus(query))
+    log(f"SEARCH | youtube: {query}")
+    speak(f"Searching YouTube for {query}.")
+
+
+def search_web(text):
+    query = extract_query(text)
+    if not query:
+        speak("What should I search for?")
+        return
+    webbrowser.open("https://www.google.com/search?q=" + quote_plus(query))
+    log(f"SEARCH | google: {query}")
+    speak(f"Searching Google for {query}.")
+
+
+def search_command(text):
+    lowered = text.lower().replace("you tube", "youtube")
+    if "youtube" in lowered:
+        search_youtube(text)
+    elif "google" in lowered:
+        search_web(text)
+    else:
+        return False        # no site named, so let the AI decide

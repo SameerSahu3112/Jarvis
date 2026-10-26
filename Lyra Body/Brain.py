@@ -9,6 +9,7 @@ from Muscles import (
     set_reminder,
 )
 from Eyes import list_folders, look_in_folder, read_file, look_at_screen, show_folder
+from Hand import handle_command, open_website, search_youtube, search_web
 
 MODEL = "qwen3:4b"      # must be a model that supports tools
 
@@ -44,6 +45,8 @@ TOOL_LIST = {
     "reminder": (set_reminder, "Set a reminder. text = like: in 10 minutes to drink water"),
     "save_note": (save_note, "Save a note to memory. text = the note"),
     "read_notes": (read_notes, "Read the saved notes aloud"),
+    "search_youtube": (search_youtube, "Search YouTube and show the results. text = only the search words, like: code with harry"),
+    "search_web": (search_web, "Search Google and show the results. text = only the search words"),
 
     # information
     "list_folders": (list_folders, "List the folders in the home folder, or inside a folder you name. text = folder name, or empty for all"),
@@ -78,6 +81,7 @@ SYSTEM_PROMPT = (
     "in two or three short sentences. If you need more information, call another tool. "
     "Never say you cannot see files or the screen, use the tools instead. "
     "Do not use bullet points or symbols."
+    "To search YouTube or the web, use the search tools. Never tell the user how to search themselves. "
 )
 
 history = [{"role": "system", "content": SYSTEM_PROMPT}]

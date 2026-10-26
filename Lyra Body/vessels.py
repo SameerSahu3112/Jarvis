@@ -8,6 +8,8 @@ from Stomach import (
     memorize_app, memorize_website, memorize_text,
     show_memorized_apps, show_memorized_websites, show_memorized_texts,
 )
+from Hand import APPS, SITES, handle_command, open_website, search_command
+from Fingers import type_command, send_it, new_line, delete_that, paste_it, whatsapp_chat
 from Muscles import (
     battery_info, cpu_info, ram_info, disk_info,
     volume_command, mute, unmute, brightness_command,
@@ -115,6 +117,11 @@ ROUTES = [
 
     # translation (Tongue)
     (["translate"], translate_command),
+    (["type", "write", "dictate"], type_command),
+
+    # search and WhatsApp
+    (["search"], search_command),
+    (["whatsapp"], whatsapp_chat),
 
     # apps and websites (last, because "open" is a general word)
     (["open"], open_anything),
@@ -124,7 +131,7 @@ ROUTES = [
 KEEP_CASE = (type_command, translate_command)
 
 # polite words that are allowed before the command
-START = r"^(?:(?:hey|ok|okay|please|jarvis|lyra|can you|could you)\s+)*"
+START = r"^(?:(?:hey|ok|okay|please|lyra|can you|could you)\s+)*"
 
 
 def route(text):
@@ -144,6 +151,7 @@ def route(text):
 def send(text):
     """The main entry point. Sends one sentence to the right organ."""
     lowered = text.lower().strip()
+    keeps_and = re.match(START + r"(type|write|dictate|translate)\b", lowered)
 
     # a sentence with "and" usually has two jobs, so the AI plans the steps,
     # except typing and translating, where "and" is part of your message
