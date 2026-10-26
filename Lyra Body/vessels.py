@@ -14,6 +14,8 @@ from Muscles import (
     take_screenshot, list_files, open_folder, create_folder, find_file,
     set_reminder,
 )
+from Fingers import type_command, send_it, new_line, delete_that, paste_it
+from Tongue import translate_command
 
 
 # ---------- small helpers for the memory commands ----------
@@ -104,21 +106,36 @@ ROUTES = [
     # reminders
     (["remind me"], set_reminder),
 
+    # keyboard (Fingers)
+    (["type", "write"], type_command),
+    (["send it", "send message", "press enter"], send_it),
+    (["new line"], new_line),
+    (["delete that", "undo typing"], delete_that),
+    (["paste it", "paste that"], paste_it),
+
+    # translation (Tongue)
+    (["translate"], translate_command),
+
     # apps and websites (last, because "open" is a general word)
     (["open"], open_anything),
 ]
 
+# these functions need your original capital letters, the others get lowercase
+KEEP_CASE = (type_command, translate_command)
+
 # polite words that are allowed before the command
-START = r"^(?:(?:hey|ok|okay|please|lyra|can you|could you)\s+)*"
+START = r"^(?:(?:hey|ok|okay|please|jarvis|lyra|can you|could you)\s+)*"
 
 
 def route(text):
     """Run the first matching route. Returns True if a route handled it."""
+    lowered = text.lower().strip()
     for phrases, function in ROUTES:
         for phrase in phrases:
-            if re.match(START + re.escape(phrase) + r"\b", text):
-                log(f"VESSEL | '{text}' -> {function.__name__}")
-                if function(text) is False:
+            if re.match(START + re.escape(phrase) + r"\b", lowered):
+                log(f"VESSEL | '{lowered}' -> {function.__name__}")
+                argument = text.strip() if function in KEEP_CASE else lowered
+                if function(argument) is False:
                     return False
                 return True
     return False
@@ -128,8 +145,10 @@ def send(text):
     """The main entry point. Sends one sentence to the right organ."""
     lowered = text.lower().strip()
 
-    # more than one job in a sentence: let the AI plan the steps
-    if " and " not in lowered and route(lowered):
+    # a sentence with "and" usually has two jobs, so the AI plans the steps,
+    # except typing and translating, where "and" is part of your message
+    keeps_and = re.match(START + r"(type|write|translate)\b", lowered)
+    if (keeps_and or " and " not in lowered) and route(text):
         return
 
     log(f"VESSEL | '{lowered}' -> brain (agent)")
