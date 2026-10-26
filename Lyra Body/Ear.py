@@ -1,22 +1,15 @@
-import io
 import time
 
 import speech_recognition as sr
 
 from logger import log
-from Tongue import to_english
 
-try:
-    from faster_whisper import WhisperModel
-    try:
-        # after the first download, load from disk only
-        model = WhisperModel("base", device="cpu", compute_type="int8", local_files_only=True)
-    except Exception:
-        # first run: download the model
-        model = WhisperModel("base", device="cpu", compute_type="int8")
-except Exception as e:
-    model = None
-    log(f"EAR | Whisper not available, using Google: {e}")
+# Languages Google should try, in order. Examples:
+#   "en-US"  English
+#   "en-IN"  Indian English
+#   "hi-IN"  Hindi
+# Each extra language is only tried if the one before it understood nothing.
+LANGUAGES = ["en-US"]
 
 # Your routes and tools understand English, so other languages get translated
 TRANSLATE_TO_ENGLISH = True
@@ -24,25 +17,19 @@ TRANSLATE_TO_ENGLISH = True
 recognizer = sr.Recognizer()
 recognizer.pause_threshold = 0.6
 
-# measure background noise once, at startup
+print("Calibrating the microphone...")
 with sr.Microphone() as source:
     recognizer.adjust_for_ambient_noise(source, duration=1)
+print("Ready.")
 
 
-def whisper_transcribe(audio):
-    wav = io.BytesIO(audio.get_wav_data(convert_rate=16000, convert_width=2))
-    segments, info = model.transcribe(
-        wav,
-        beam_size=1,            # faster
-        vad_filter=True,        # ignore silence and noise
-        initial_prompt="Lyra",  # helps it spell the name
-    )
-    text = " ".join(segment.text.strip() for segment in segments).strip()
-    return text, info.language
-
-
-def google_transcribe(audio):
-    return getattr(recognizer, "recognize_google")(audio), "en"
+def english(text):
+    try:
+        from Tongue import to_english
+        return to_english(text)
+    except Exception as e:
+        log(f"EAR | translation skipped: {e}")
+        return text
 
 
 def listen():
@@ -55,30 +42,27 @@ def listen():
             return ""
 
     started = time.time()
-    text, language, engine = "", "en", ""
+    text, language = "", ""
 
-    if model is not None:
+    for code in LANGUAGES:
         try:
-            text, language = whisper_transcribe(audio)
-            engine = "whisper"
-        except Exception as e:
-            log(f"EAR | whisper FAILED, using google: {e}")
-
-    if not engine:
-        try:
-            text, language = google_transcribe(audio)
-            engine = "google"
+            text = getattr(recognizer, "recognize_google")(audio, language=code)
+            language = code
+            break
         except sr.UnknownValueError:
-            print("Voice captured, but words weren't understood.")
-            return ""
+            continue
         except sr.RequestError as e:
             print("Google service error:", e)
             return ""
 
-    original = text
-    if TRANSLATE_TO_ENGLISH and language != "en" and text:
-        text = to_english(text)
+    if not text:
+        print("Voice captured, but words weren't understood.")
+        return ""
 
-    log(f"EAR | {engine} ({language}) took {time.time() - started:.1f}s: {original} -> {text}")
+    original = text
+    if TRANSLATE_TO_ENGLISH and not language.startswith("en"):
+        text = english(text)
+
+    log(f"EAR | google ({language}) took {time.time() - started:.1f}s: {original} -> {text}")
     print(f"Recognized ({language}):", text)
     return text
