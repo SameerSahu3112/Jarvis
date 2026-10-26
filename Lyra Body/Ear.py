@@ -6,10 +6,14 @@ import speech_recognition as sr
 from logger import log
 from Tongue import to_english
 
-# Whisper runs on your laptop: free, no account, no API key
 try:
     from faster_whisper import WhisperModel
-    model = WhisperModel("base", device="cpu", compute_type="int8")   # "small" is more accurate but slower
+    try:
+        # after the first download, load from disk only
+        model = WhisperModel("base", device="cpu", compute_type="int8", local_files_only=True)
+    except Exception:
+        # first run: download the model
+        model = WhisperModel("base", device="cpu", compute_type="int8")
 except Exception as e:
     model = None
     log(f"EAR | Whisper not available, using Google: {e}")
