@@ -18,7 +18,21 @@ from Muscles import (
 )
 from Fingers import type_command, send_it, new_line, delete_that, paste_it
 from Tongue import translate_command
+from Brain import think
+from Stomach import remember, recall
 
+def route_signal(message):
+    message = message.lower()
+    
+    # Vessel decides: Is this for the Stomach?
+    if "memorise" in message:
+        return remember(message)
+    
+    if "what did i" in message or "recall" in message:
+        return recall(message)
+    
+    # Otherwise, the Vessel carries it to the Brain
+    return think(message)
 
 # ---------- small helpers for the memory commands ----------
 

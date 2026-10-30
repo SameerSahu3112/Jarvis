@@ -10,6 +10,15 @@ from Muscles import (
 )
 from Eyes import list_folders, look_in_folder, read_file, look_at_screen, show_folder
 from Hand import handle_command, open_website, search_youtube, search_web
+import requests
+
+def think(text):
+    # Brain sends the message to Ollama
+    response = requests.post('http://localhost:11434/api/generate', 
+                             json={"model": "qwen3:4b", "prompt": text, "stream": False})
+    
+    # Brain extracts the answer
+    return response.json().get("response", "My brain is foggy, try again.")
 
 MODEL = "qwen3:4b"      # must be a model that supports tools
 

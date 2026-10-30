@@ -119,3 +119,29 @@
 2026-10-26 17:26:48 | VESSEL | 'code with harry' -> brain (agent)
 2026-10-26 17:27:23 | EAR | google (en-US) took 1.0s: exit -> exit
 2026-10-26 17:27:23 | EXIT | user said exit
+2026-10-26 18:59:37 | EAR | google (en-US) took 1.0s: open YouTube and search code with Harry -> open YouTube and search code with Harry
+2026-10-26 18:59:48 | EAR | google (en-US) took 1.0s: Lyra -> Lyra
+2026-10-26 18:59:48 | START | Lyra woke up
+2026-10-26 18:59:59 | EAR | google (en-US) took 1.9s: open YouTube and search code with Har -> open YouTube and search code with Har
+2026-10-26 18:59:59 | VESSEL | 'open youtube and search code with har' -> brain (agent)
+2026-10-26 19:01:43 | WEBSITE | opened youtube | success
+2026-10-26 19:01:43 | AGENT | open_website('youtube') -> Done.
+2026-10-26 19:01:46 | SEARCH | youtube: code with har
+2026-10-26 19:02:17 | AGENT | search_youtube('code with Har') -> Done.
+2026-10-29 01:48:08 | EAR | google (en-US) took 0.8s: Lyra -> Lyra
+2026-10-29 01:48:08 | START | Lyra woke up
+2026-10-29 01:48:17 | EAR | google (en-US) took 0.7s: open WhatsApp -> open WhatsApp
+2026-10-29 01:48:17 | VESSEL | 'open whatsapp' -> open_anything
+2026-10-29 01:48:19 | APP | opened WhatsApp | success
+2026-10-29 01:48:26 | EAR | google (en-US) took 0.8s: open code -> open code
+2026-10-29 01:48:26 | VESSEL | 'open code' -> open_anything
+2026-10-29 01:48:26 | VESSEL | 'open code' -> brain (agent)
+2026-10-29 01:48:26 | BRAIN | FAILED: Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download
+2026-10-29 01:48:36 | EAR | google (en-US) took 0.7s: file Lyra -> file Lyra
+2026-10-29 01:48:36 | VESSEL | 'file lyra' -> brain (agent)
+2026-10-29 01:48:36 | BRAIN | FAILED: Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download
+2026-10-29 01:48:50 | EAR | google (en-US) took 0.6s: good bye -> good bye
+2026-10-29 01:48:50 | VESSEL | 'good bye' -> brain (agent)
+2026-10-29 01:48:50 | BRAIN | FAILED: Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download
+2026-10-29 01:49:00 | EAR | google (en-US) took 0.7s: exit -> exit
+2026-10-29 01:49:00 | EXIT | user said exit

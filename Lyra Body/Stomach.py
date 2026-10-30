@@ -1,6 +1,30 @@
 from Nerves import create_connection_route
 from Mouth import speak
 from Hand import APPS, SITES
+import mysql.connector
+
+def remember(text):
+
+    create_connection_route()
+    # Stomach opens the MySQL connection
+    db = mysql.connector.connect()
+    cursor = db.cursor()
+    
+    # Stomach saves the memory
+    cursor.execute("INSERT INTO memorized_text (text) VALUES (%s)", (text,))
+    db.commit()
+    
+    return "I have stored this in my stomach."
+
+def recall(text):
+    db = mysql.connector.connect(host="localhost", user="root", password="yourpassword", database="lyra_db")
+    cursor = db.cursor()
+    
+    # Stomach searches for the memory
+    cursor.execute("SELECT text FROM memorized_text ORDER BY id DESC LIMIT 1")
+    result = cursor.fetchone()
+    
+    return f"My stomach remembers: {result[0]}" if result else "My stomach is empty."
 
 
 def memorize_app(name, path):
